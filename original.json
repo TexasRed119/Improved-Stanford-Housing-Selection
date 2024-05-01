@@ -1,0 +1,89 @@
+{
+    "meier": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "wooden_flooring"
+                ],
+                "num_rooms": 9
+            },
+            {
+                "facilities": [
+                    "braille_signage",
+                    "carpet_flooring",
+                    "wooden_flooring",
+                    "personal_kitchen",
+                    "elevator_access",
+                    "sink"
+                ],
+                "num_rooms": 17
+            }
+        ]
+    },
+    "suites": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 9
+            },
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "personal_kitchen",
+                    "ground_floor",
+                    "braille_signage",
+                    "elevator_access"
+                ],
+                "num_rooms": 18
+            }
+        ]
+    },
+    "ng": {
+        "3-room quad": [
+            {
+                "facilities": [
+                    "wooden_flooring"
+                ],
+                "num_rooms": 2
+            },
+            {
+                "facilities": [
+                    "sink",
+                    "wooden_flooring",
+                    "braille_signage",
+                    "ground_floor",
+                    "carpet_flooring"
+                ],
+                "num_rooms": 3
+            },
+            {
+                "facilities": [
+                    "ground_floor",
+                    "personal_kitchen",
+                    "wooden_flooring",
+                    "elevator_access",
+                    "sink"
+                ],
+                "num_rooms": 15
+            }
+        ]
+    },
+    "faisan": {
+        "1-room quad": [
+            {
+                "facilities": [],
+                "num_rooms": 10
+            },
+            {
+                "facilities": [
+                    "personal_kitchen",
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 17
+            }
+        ]
+    }
+}
