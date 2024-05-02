@@ -112,3 +112,5 @@ def generate_students(rooms_data, num_students, dorm_names, room_configurations,
   return pd.DataFrame(data = students, columns = column_names)
 
 df_students = generate_students(rooms_data, 90, dorm_names, room_configurations, accomodations)
+
+print(df_students)
