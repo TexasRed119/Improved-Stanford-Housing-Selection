@@ -2,6 +2,7 @@ import random
 import json
 import numpy as np
 import pandas as pd
+from modified_srsd import modified_srsd
 
 with open('original.json', 'r') as file:
     rooms_data = json.load(file)
@@ -113,4 +114,16 @@ def generate_students(rooms_data, num_students, dorm_names, room_configurations,
 
 df_students = generate_students(rooms_data, 90, dorm_names, room_configurations, accomodations)
 
+# print(df_students)
+
+# Example usage
+oae_threshold = 0.3  # Adjust the threshold as needed
+year_priority = [4, 3, 2]  # Specify the year priority order
+
+assignments = modified_srsd(df_students, rooms_data, oae_threshold, year_priority)
+
 print(df_students)
+
+# Print the housing assignments
+for student_id, (dorm, room) in assignments.items():
+    print(f"Student {student_id}: {dorm} - {room}")
