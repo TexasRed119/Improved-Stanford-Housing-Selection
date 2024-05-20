@@ -1,0 +1,199 @@
+{
+    "Hyperion": {
+      "Otero": {
+        "Population": "4-Class",
+        "Total Assignable Spaces": 79,
+        "Spaces in Apartment Style Units": {},
+        "Spaces in Residence Halls and Row Houses": {
+          "Single Spaces": [
+            {"Count": 6, "Amenities": ["carpet_flooring", "sink"]},
+            {"Count": 5, "Amenities": ["elevator_access", "wooden_flooring"]}
+          ],
+          "1-room Double Spaces": [
+            {"Count": 36, "Amenities": ["elevator_access", "braille_signage"]},
+            {"Count": 32, "Amenities": ["kitchen", "ground_floor"]}
+          ]
+        },
+        "University Theme House": {
+          "Theme Type": "Academic",
+          "Theme Notes": "Public Service & Civic Engagement"
+        }
+      },
+      "Rinconada": {
+        "Population": "Frosh",
+        "Total Assignable Spaces": 94,
+        "Spaces in Apartment Style Units": {},
+        "Spaces in Residence Halls and Row Houses": {
+          "Single Spaces": [
+            {"Count": 5, "Amenities": ["carpet_flooring", "sink"]},
+            {"Count": 3, "Amenities": ["elevator_access"]}
+          ],
+          "1-room Double Spaces": [
+            {"Count": 50, "Amenities": ["elevator_access", "braille_signage"]},
+            {"Count": 36, "Amenities": ["kitchen", "wooden_flooring"]}
+          ]
+        },
+        "University Theme House": {}
+      },
+      "Soto": {
+        "Population": "Frosh",
+        "Total Assignable Spaces": 94,
+        "Spaces in Apartment Style Units": {},
+        "Spaces in Residence Halls and Row Houses": {
+          "Single Spaces": [
+            {"Count": 3, "Amenities": ["wooden_flooring", "ground_floor"]},
+            {"Count": 5, "Amenities": ["sink", "elevator_access"]}
+          ],
+          "1-room Double Spaces": [
+            {"Count": 40, "Amenities": ["carpet_flooring", "elevator_access"]},
+            {"Count": 46, "Amenities": ["braille_signage", "personal_kitchen"]}
+          ]
+        },
+        "University Theme House": {}
+      },
+      "Trancos": {
+        "Population": "Upperclass",
+        "Total Assignable Spaces": 85,
+        "Spaces in Apartment Style Units": {},
+        "Spaces in Residence Halls and Row Houses": {
+          "Single Spaces": [
+            {"Count": 3, "Amenities": ["ground_floor", "wooden_flooring"]},
+            {"Count": 2, "Amenities": ["elevator_access", "sink"]}
+          ],
+          "1-room Double Spaces": [
+            {"Count": 40, "Amenities": ["carpet_flooring", "braille_signage"]},
+            {"Count": 40, "Amenities": ["elevator_access", "personal_kitchen"]}
+          ]
+        },
+        "University Theme House": {
+          "Theme Type": "Academic",
+          "Theme Notes": "Outdoor House"
+        }
+      },
+      "Kappa Alpha": {
+        "Population": "Upperclass",
+        "Total Assignable Spaces": 49,
+        "Spaces in Apartment Style Units": {},
+        "Spaces in Residence Halls and Row Houses": {
+          "Single Spaces": [
+            {"Count": 8, "Amenities": ["wooden_flooring", "ground_floor"]},
+            {"Count": 5, "Amenities": ["sink", "braille_signage"]}
+          ],
+          "1-room Double Spaces": [
+            {"Count": 18, "Amenities": ["elevator_access", "carpet_flooring"]},
+            {"Count": 16, "Amenities": ["personal_kitchen"]}
+          ],
+          "2-room Double Spaces": [
+            {"Count": 2, "Amenities": ["ground_floor", "wooden_flooring"]}
+          ]
+        },
+        "University Theme House": {
+          "Theme Type": "Greek",
+          "Theme Notes": "Fraternity"
+        }
+      },
+      "Enchanted Broccoli Forest (EBF)": {
+        "Population": "Upperclass",
+        "Total Assignable Spaces": 54,
+        "Spaces in Apartment Style Units": {},
+        "Spaces in Residence Halls and Row Houses": {
+          "Single Spaces": [
+            {"Count": 3, "Amenities": ["carpet_flooring", "sink"]},
+            {"Count": 1, "Amenities": ["elevator_access", "braille_signage"]}
+          ],
+          "1-room Double Spaces": [
+            {"Count": 20, "Amenities": ["elevator_access", "kitchen"]},
+            {"Count": 30, "Amenities": ["wooden_flooring"]}
+          ]
+        },
+        "University Theme House": {
+          "Theme Type": "Cooperative",
+          "Theme Notes": ""
+        }
+      },
+      "Jerry": {
+        "Population": "Upperclass",
+        "Total Assignable Spaces": 54,
+        "Spaces in Apartment Style Units": {},
+        "Spaces in Residence Halls and Row Houses": {
+          "Single Spaces": [
+            {"Count": 1, "Amenities": ["carpet_flooring", "ground_floor"]},
+            {"Count": 3, "Amenities": ["wooden_flooring"]}
+          ],
+          "1-room Double Spaces": [
+            {"Count": 26, "Amenities": ["elevator_access", "sink"]},
+            {"Count": 24, "Amenities": ["braille_signage"]}
+          ]
+        },
+        "University Theme House": {}
+      },
+      "Narnia": {
+        "Population": "Upperclass",
+        "Total Assignable Spaces": 53,
+        "Spaces in Apartment Style Units": {},
+        "Spaces in Residence Halls and Row Houses": {
+          "Single Spaces": [
+            {"Count": 2, "Amenities": ["carpet_flooring", "sink"]},
+            {"Count": 3, "Amenities": ["elevator_access", "braille_signage"]}
+          ],
+          "1-room Double Spaces": [
+            {"Count": 28, "Amenities": ["elevator_access", "ground_floor"]},
+            {"Count": 20, "Amenities": ["wooden_flooring"]}
+          ]
+        },
+        "University Theme House": {}
+      },
+      "Toussaint Louverture House (610 Mayfield)": {
+        "Population": "Upperclass",
+        "Total Assignable Spaces": 43,
+        "Spaces in Apartment Style Units": {},
+        "Spaces in Residence Halls and Row Houses": {
+          "Single Spaces": [
+            {"Count": 3, "Amenities": ["wooden_flooring", "sink"]},
+            {"Count": 3, "Amenities": ["elevator_access", "ground_floor"]}
+          ],
+          "1-room Double Spaces": [
+            {"Count": 15, "Amenities": ["carpet_flooring", "elevator_access"]},
+            {"Count": 15, "Amenities": ["braille_signage"]}
+          ],
+          "1-room Triple Spaces": [
+            {"Count": 5, "Amenities": ["personal_kitchen", "ground_floor"]}
+          ],
+          "1-room Quad Spaces": [
+            {"Count": 2, "Amenities": ["elevator_access", "sink"]},
+            {"Count": 2, "Amenities": ["wooden_flooring", "ground_floor"]}
+          ]
+        },
+        "University Theme House": {}
+      },
+      "EVGR-A Duan Family Hall": {
+        "Population": "Upperclass",
+        "Total Assignable Spaces": 184,
+        "Spaces in Apartment Style Units": {
+          "1-room Single": [
+            {"Count": 184, "Amenities": ["carpet_flooring", "bathroom", "sink", "kitchen"]}
+          ],
+          "1-room Double": [
+            {"Count": 184, "Amenities": ["carpet_flooring", "bathroom", "sink", "kitchen"]}
+          ]
+        },
+        "Spaces in Residence Halls and Row Houses": {},
+        "University Theme House": {}
+      },
+      "Mirrielees": {
+        "Population": "Upperclass",
+        "Total Assignable Spaces": 48,
+        "Spaces in Apartment Style Units": {
+          "1-room Single": [
+            {"Count": 48, "Amenities": ["wooden_flooring", "bathroom", "sink", "kitchen"]}
+          ],
+          "1-room Double": [
+            {"Count": 48, "Amenities": ["wooden_flooring", "bathroom", "sink", "kitchen"]}
+          ]
+        },
+        "Spaces in Residence Halls and Row Houses": {},
+        "University Theme House": {}
+      }
+    }
+  }
+  
