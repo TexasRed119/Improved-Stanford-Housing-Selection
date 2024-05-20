@@ -125,30 +125,32 @@ def current_assignment_mech(df_students, assignment_data):
 
   #assign OAE students first for control/current system
   #OAE assumption system for current assignment: 50% get first assignment, 50% get second
-  for i in range(len(df_students.index)):
-    student = df_students.loc[i,:]
-    if student['OAE'] != "None":
-      OAE = student['OAE']
-      r = random.randint(1,4)
-      #assign to top choice 50% of time (assumption for now)
-      assigned = False
-      k = 1
-      #TODO: what if only available choice for OAE is 1st choice? below starting at 2nd choice will cause bug. add clause to if statement? or maybe add something to for loop that loops back to 1 if no others after all options exhausted
-      if r > 2:
-        k = 2
-      #TODO: does below need to be changed to reflect when rank k choice doesn't exist to prevent out-of-bounds error? (this shouldn't occur ever tho, everyone can be assigned based on nature of system)
-      while assigned == False:
-        top_choice = student[student == k].index[-1]
-        #note that the below will look different when we incorporate room configurations in rankings
-        for room_type in assignment_data[top_choice]:
-          for j in range(len(assignment_data[top_choice][room_type])):
-            if OAE in assignment_data[top_choice][room_type][j]['facilities']:
-              if assignment_data[top_choice][room_type][j]['num_rooms'] > 0:
-                df_students.loc[df_students['student_id'] == student['student_id'], "Assignment"] = top_choice
-                assignment_data[top_choice][room_type][j]['num_rooms'] = assignment_data[top_choice][room_type][j]['num_rooms'] - 1
-                assigned = True
-                break
-        k += 1
+  for year in range(4, 1, -1):
+    df_year = df_students.loc[df_students["year"] == year].reset_index(drop=True)
+    for i in range(len(df_year.index)):
+      student = df_year.loc[i,:]
+      if student['OAE'] != "None":
+        OAE = student['OAE']
+        r = random.randint(1,4)
+        #assign to top choice 50% of time (assumption for now)
+        assigned = False
+        k = 1
+        #TODO: what if only available choice for OAE is 1st choice? below starting at 2nd choice will cause bug. add clause to if statement? or maybe add something to for loop that loops back to 1 if no others after all options exhausted
+        if r > 2:
+          k = 2
+        #TODO: does below need to be changed to reflect when rank k choice doesn't exist to prevent out-of-bounds error? (this shouldn't occur ever tho, everyone can be assigned based on nature of system)
+        while assigned == False:
+          top_choice = student[student == k].index[-1]
+          #note that the below will look different when we incorporate room configurations in rankings
+          for room_type in assignment_data[top_choice]:
+            for j in range(len(assignment_data[top_choice][room_type])):
+              if OAE in assignment_data[top_choice][room_type][j]['facilities']:
+                if assignment_data[top_choice][room_type][j]['num_rooms'] > 0:
+                  df_students.loc[df_students['student_id'] == student['student_id'], "Assignment"] = top_choice
+                  assignment_data[top_choice][room_type][j]['num_rooms'] = assignment_data[top_choice][room_type][j]['num_rooms'] - 1
+                  assigned = True
+                  break
+          k += 1
 
   #now traverse and assign through each year, starting with seniors
   for year in range(4, 1, -1):
