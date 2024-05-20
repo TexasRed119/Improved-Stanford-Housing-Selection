@@ -179,6 +179,6 @@ df_students = generate_students(rooms_data, 90, dorm_names, room_configurations,
 with open('original.json', 'r') as file:
     assignment_data = json.load(file)
 
-df_students, assignment_data = current_assignment_mech(df_students, assignment_data)
+df_assignments_current, assignment_data = current_assignment_mech(df_students, assignment_data)
 
 print(df_students)
