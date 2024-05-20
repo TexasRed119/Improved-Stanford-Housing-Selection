@@ -181,4 +181,4 @@ with open('original.json', 'r') as file:
 
 df_assignments_current, assignment_data = current_assignment_mech(df_students, assignment_data)
 
-print(df_students)
+print(df_assignments_current)
