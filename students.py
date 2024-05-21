@@ -60,7 +60,7 @@ def generate_students(rooms_data, num_students, dorm_names, room_configurations,
         current_student[1] = year
 
         # OAE accommodations
-        num_oae = random.choices([0, 1, 2], weights=[0.7, 0.15, 0.15])[0]
+        num_oae = random.choices([0, 1, 2], weights=[0.65, 0.25, 0.10])[0]
         oae_accommodations = random.sample(accomodations[:-1], num_oae)
         current_student[2] = ",".join(oae_accommodations) if num_oae > 0 else "None"
 
@@ -123,7 +123,7 @@ def current_assignment_mech(df_students, rooms_data, year_priority):
     assignments = {}
 
     # Function to assign students to rooms
-    def assign_rooms(students, half_oae=False):
+    def assign_rooms(students, random_oae=False):
         for idx, student in students.iterrows():
             student_id = student['student_id']
             ranked_dorms = student['Rankings']
@@ -131,41 +131,54 @@ def current_assignment_mech(df_students, rooms_data, year_priority):
 
             assigned = False
 
-            if oae_accommodations and half_oae and idx % 2 == 1:
-                # Assign 50% of OAE students to their second preference (if available)
-                ranked_dorms = ranked_dorms[1:]
-
-            for dorm in ranked_dorms:
-                if dorm in rooms_data:
-                    for room_type, rooms in rooms_data[dorm].items():
-                        for room in rooms:
-                            if room['num_rooms'] > 0 and (not oae_accommodations or all(oae in room['facilities'] for oae in oae_accommodations)):
-                                assignments[student_id] = (dorm, room_type)
-                                room['num_rooms'] -= 1
-                                assigned = True
-                                break
-                        if assigned:
-                            break
-                if assigned:
-                    break
-
-            # Fallback to any available room if no preferred room is found
-            if not assigned:
+            if random_oae and oae_accommodations:
+                # Randomly assign OAE students to a dorm that matches their accommodations
+                matching_dorms = []
                 for dorm, room_types in rooms_data.items():
                     for room_type, rooms in room_types.items():
                         for room in rooms:
-                            if room['num_rooms'] > 0:
-                                assignments[student_id] = (dorm, room_type)
-                                room['num_rooms'] -= 1
-                                assigned = True
+                            if room['num_rooms'] > 0 and all(oae in room['facilities'] for oae in oae_accommodations):
+                                matching_dorms.append((dorm, room_type, room))
+
+                if matching_dorms:
+                    dorm, room_type, room = random.choice(matching_dorms)
+                    assignments[student_id] = (dorm, room_type)
+                    room['num_rooms'] -= 1
+                    assigned = True
+
+            if not assigned:
+                # Continue with regular assignment logic
+                for dorm in ranked_dorms:
+                    if dorm in rooms_data:
+                        for room_type, rooms in rooms_data[dorm].items():
+                            for room in rooms:
+                                if room['num_rooms'] > 0 and (not oae_accommodations or all(oae in room['facilities'] for oae in oae_accommodations)):
+                                    assignments[student_id] = (dorm, room_type)
+                                    room['num_rooms'] -= 1
+                                    assigned = True
+                                    break
+                            if assigned:
                                 break
-                        if assigned:
-                            break
                     if assigned:
                         break
 
-    # Process OAE students first with 50% logic
-    assign_rooms(df_students[df_students['OAE'] != "None"], half_oae=True)
+                # Fallback to any available room if no preferred room is found
+                if not assigned:
+                    for dorm, room_types in rooms_data.items():
+                        for room_type, rooms in room_types.items():
+                            for room in rooms:
+                                if room['num_rooms'] > 0:
+                                    assignments[student_id] = (dorm, room_type)
+                                    room['num_rooms'] -= 1
+                                    assigned = True
+                                    break
+                            if assigned:
+                                break
+                        if assigned:
+                            break
+
+    # Process OAE students first with random assignment
+    assign_rooms(df_students[df_students['OAE'] != "None"], random_oae=True)
 
     # Process non-OAE students
     assign_rooms(df_students[df_students['OAE'] == "None"])
