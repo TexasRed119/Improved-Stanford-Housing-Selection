@@ -200,14 +200,17 @@ with pd.option_context('display.max_rows', None, 'display.max_columns', None):  
 modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data, year_priority)
 current_assignments = current_assignment_mech(df_students2, rooms_data2, year_priority)
 
-# print("Current mech:")
-# for student_id, (dorm, room) in current_assignments.items():
-#       print(f"Student {student_id}: {dorm} - {room}")
-    
+def print_sorted_assignments(assignments, df_students):
+    sorted_assignments = sorted(assignments.items())
+    for student_id, (dorm, room_type) in sorted_assignments:
+        print(f"Student {student_id}: {dorm} - {room_type}")
 
-# print("Modified mech:")
-# for student_id, (dorm, room) in modified_assignments.items():
-#     print(f"Student {student_id}: {dorm} - {room}")
+print("\nCurrent mech assignments (sorted by student ID):")
+print_sorted_assignments(current_assignments, df_students2)
+
+print("\nModified mech assignments (sorted by student ID):")
+print_sorted_assignments(modified_assignments, df_students1)
+
 
 
 def count_oae_students(assignments, df_students):
@@ -233,3 +236,23 @@ for dorm in dorm_names:
 print("\nModified mech OAE proportions:")
 for dorm in dorm_names:
     print(f"{dorm}: {modified_oae_proportions[dorm]:.2f} ({modified_oae_counts[dorm]}/{modified_total_counts[dorm]})")
+
+def calculate_score(assignments, df_students): 
+    
+    scores = [0, 0, 0]
+
+    for student_id, (dorm, room) in assignments.items():
+        dorm_rank = list(df_students['Rankings'][student_id])
+        student_score = 5 - dorm_rank.index(dorm)
+        scores[0] += student_score
+        if df_students.loc[df_students['student_id'] == student_id, 'OAE'].values[0] != "None":
+            scores[1] += student_score
+        else:
+            scores[2] += student_score
+            
+    return scores
+
+current_score = calculate_score(current_assignments, df_students2)
+modified_score = calculate_score(modified_assignments, df_students1)
+
+print(f'Current mech score: {current_score} \nModified mech score : {modified_score}')
