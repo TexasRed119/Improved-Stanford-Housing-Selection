@@ -197,7 +197,7 @@ year_priority = [4, 3, 2]  # Specify the year priority order
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
     print(df_students1)
 
-modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data, year_priority)
+modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data, year_priority, higher_threshold_for_popular=True)
 current_assignments = current_assignment_mech(df_students2, rooms_data2, year_priority)
 
 def print_sorted_assignments(assignments, df_students):
@@ -243,14 +243,16 @@ def calculate_score(assignments, df_students):
 
     for student_id, (dorm, room) in assignments.items():
         dorm_rank = list(df_students['Rankings'][student_id])
-        student_score = 5 - dorm_rank.index(dorm)
+        student_score = 1 / (dorm_rank.index(dorm) + 1)
         scores[0] += student_score
         if df_students.loc[df_students['student_id'] == student_id, 'OAE'].values[0] != "None":
             scores[1] += student_score
         else:
             scores[2] += student_score
-            
-    return scores
+
+    for index in range(len(scores)):
+        scores[index] = scores[index] / len(assignments)
+    return scores 
 
 current_score = calculate_score(current_assignments, df_students2)
 modified_score = calculate_score(modified_assignments, df_students1)
