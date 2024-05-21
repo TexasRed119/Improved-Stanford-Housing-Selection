@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from modified_srsd import modified_srsd
 from modified_srsd_multipleOAE import multipleOAE_modified_srsd
+import copy
 
 
 with open('original.json', 'r') as file:
@@ -57,7 +58,7 @@ def generate_students(rooms_data, num_students, dorm_names, room_configurations,
         current_student[1] = year
 
         # OAE accommodations
-        num_oae = random.choices([0, 1, 2], weights=[0.6, 0.25, 0.15])[0]
+        num_oae = random.choices([0, 1, 2], weights=[0.8, 0.15, 0.05])[0]
         oae_accommodations = random.sample(accomodations[:-1], num_oae)
         current_student[2] = ",".join(oae_accommodations) if num_oae > 0 else "None"
 
@@ -119,94 +120,66 @@ def current_assignment_mech(df_students, rooms_data, year_priority):
     # Initialize variables to store the housing assignments
     assignments = {}
 
-    # Assign OAE students first for control/current system
-    # OAE assumption system for current assignment: 50% get first assignment, 50% get second
-    for _, student in df_students[df_students['OAE'] != "None"].iterrows():
-        student_id = student['student_id']
-        oae_accommodations = student['OAE'].split(',')
-        ranked_dorms = student['Rankings']
-        r = random.randint(1, 4)
-        # Assign to top choice 50% of time (assumption for now)
-        if r > 2:
-            ranked_dorms = ranked_dorms[1:]  # Remove the first choice
+    # Function to assign students to rooms
+    def assign_rooms(students):
+        for _, student in students.iterrows():
+            student_id = student['student_id']
+            ranked_dorms = student['Rankings']
+            oae_accommodations = student['OAE'].split(',') if student['OAE'] != "None" else []
 
-        assigned = False
-        for dorm in ranked_dorms:
-            if dorm in rooms_data:
-                for room_type in rooms_data[dorm]:
-                    for j in range(len(rooms_data[dorm][room_type])):
-                        if all(oae in rooms_data[dorm][room_type][j]['facilities'] for oae in oae_accommodations):
-                            if rooms_data[dorm][room_type][j]['num_rooms'] > 0:
+            assigned = False
+            for dorm in ranked_dorms:
+                if dorm in rooms_data:
+                    for room_type, rooms in rooms_data[dorm].items():
+                        for room in rooms:
+                            if room['num_rooms'] > 0 and (not oae_accommodations or all(oae in room['facilities'] for oae in oae_accommodations)):
                                 assignments[student_id] = (dorm, room_type)
-                                rooms_data[dorm][room_type][j]['num_rooms'] -= 1
+                                room['num_rooms'] -= 1
                                 assigned = True
                                 break
-                    if assigned:
-                        break
-            if assigned:
-                break
-        if not assigned:
-            # If no suitable room found, assign to any available room
-            for dorm in rooms_data:
-                for room_type in rooms_data[dorm]:
-                    for j in range(len(rooms_data[dorm][room_type])):
-                        if rooms_data[dorm][room_type][j]['num_rooms'] > 0:
-                            assignments[student_id] = (dorm, room_type)
-                            rooms_data[dorm][room_type][j]['num_rooms'] -= 1
-                            assigned = True
+                        if assigned:
                             break
-                    if assigned:
-                        break
                 if assigned:
                     break
 
-    # Now traverse and assign through each year, based on the year priority
-    for _, student in df_students[df_students['OAE'] == "None"].iterrows():
-        student_id = student['student_id']
-        ranked_dorms = student['Rankings']
-        assigned = False
-        for dorm in ranked_dorms:
-            if dorm in rooms_data:
-                for room_type in rooms_data[dorm]:
-                    for j in range(len(rooms_data[dorm][room_type])):
-                        if rooms_data[dorm][room_type][j]['num_rooms'] > 0:
-                            assignments[student_id] = (dorm, room_type)
-                            rooms_data[dorm][room_type][j]['num_rooms'] -= 1
-                            assigned = True
+            # Fallback to any available room if no preferred room is found
+            if not assigned:
+                for dorm, room_types in rooms_data.items():
+                    for room_type, rooms in room_types.items():
+                        for room in rooms:
+                            if room['num_rooms'] > 0:
+                                assignments[student_id] = (dorm, room_type)
+                                room['num_rooms'] -= 1
+                                assigned = True
+                                break
+                        if assigned:
                             break
                     if assigned:
                         break
-            if assigned:
-                break
-        if not assigned:
-            # If no suitable room found, assign to any available room
-            for dorm in rooms_data:
-                for room_type in rooms_data[dorm]:
-                    for j in range(len(rooms_data[dorm][room_type])):
-                        if rooms_data[dorm][room_type][j]['num_rooms'] > 0:
-                            assignments[student_id] = (dorm, room_type)
-                            rooms_data[dorm][room_type][j]['num_rooms'] -= 1
-                            assigned = True
-                            break
-                    if assigned:
-                        break
-                if assigned:
-                    break
+
+    # Process OAE students first
+    assign_rooms(df_students[df_students['OAE'] != "None"])
+
+    # Process non-OAE students
+    assign_rooms(df_students[df_students['OAE'] == "None"])
 
     return assignments
 
-df_students = generate_students(rooms_data, 90, dorm_names, room_configurations, accomodations)
 
+df_students1 = generate_students(rooms_data, 90, dorm_names, room_configurations, accomodations)
+df_students2 = copy.deepcopy(df_students1)
+rooms_data2 = copy.deepcopy(rooms_data)
 # print(df_students)
 
 # Example usage
 # oae_threshold = 0.3  # Adjust the threshold as needed
 year_priority = [4, 3, 2]  # Specify the year priority order
 
-modified_assignments = multipleOAE_modified_srsd(df_students, rooms_data, year_priority)
-current_assignments = current_assignment_mech(df_students, rooms_data, year_priority)
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
-    print(df_students)
+    print(df_students1)
+
+modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data, year_priority)
+current_assignments = current_assignment_mech(df_students2, rooms_data2, year_priority)
 
 print("Current mech:")
 for student_id, (dorm, room) in current_assignments.items():
