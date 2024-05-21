@@ -200,12 +200,36 @@ with pd.option_context('display.max_rows', None, 'display.max_columns', None):  
 modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data, year_priority)
 current_assignments = current_assignment_mech(df_students2, rooms_data2, year_priority)
 
-print("Current mech:")
-for student_id, (dorm, room) in current_assignments.items():
-    print(f"Student {student_id}: {dorm} - {room}")
+# print("Current mech:")
+# for student_id, (dorm, room) in current_assignments.items():
+#       print(f"Student {student_id}: {dorm} - {room}")
+    
 
-print("Modified mech:")
-for student_id, (dorm, room) in modified_assignments.items():
-    print(f"Student {student_id}: {dorm} - {room}")
+# print("Modified mech:")
+# for student_id, (dorm, room) in modified_assignments.items():
+#     print(f"Student {student_id}: {dorm} - {room}")
 
 
+def count_oae_students(assignments, df_students):
+    oae_counts = {dorm: 0 for dorm in dorm_names}
+    total_counts = {dorm: 0 for dorm in dorm_names}
+
+    for student_id, (dorm, room) in assignments.items():
+        total_counts[dorm] += 1
+        if df_students.loc[df_students['student_id'] == student_id, 'OAE'].values[0] != "None":
+            oae_counts[dorm] += 1
+
+    oae_proportions = {dorm: (oae_counts[dorm] / total_counts[dorm]) if total_counts[dorm] > 0 else 0 for dorm in dorm_names}
+    return oae_counts, total_counts, oae_proportions
+
+# Calculate OAE student proportions
+current_oae_counts, current_total_counts, current_oae_proportions = count_oae_students(current_assignments, df_students2)
+modified_oae_counts, modified_total_counts, modified_oae_proportions = count_oae_students(modified_assignments, df_students1)
+
+print("Current mech OAE proportions:")
+for dorm in dorm_names:
+    print(f"{dorm}: {current_oae_proportions[dorm]:.2f} ({current_oae_counts[dorm]}/{current_total_counts[dorm]})")
+
+print("\nModified mech OAE proportions:")
+for dorm in dorm_names:
+    print(f"{dorm}: {modified_oae_proportions[dorm]:.2f} ({modified_oae_counts[dorm]}/{modified_total_counts[dorm]})")
