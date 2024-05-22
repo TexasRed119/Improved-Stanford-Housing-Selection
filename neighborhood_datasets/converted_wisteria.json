@@ -1,0 +1,494 @@
+{
+    "casta\u00f1o": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 6
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 10
+            },
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 16
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 25
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 17
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "3-room triple": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 24
+            }
+        ]
+    },
+    "kimball": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 20
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 23
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 30
+            },
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 20
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 50
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 46
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 9
+            }
+        ],
+        "3-room triple": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 12
+            }
+        ],
+        "1-room quad": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 4
+            }
+        ]
+    },
+    "lantana": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 12
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 10
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 15
+            },
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 13
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 28
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 26
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 9
+            }
+        ]
+    },
+    "ng": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 20
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 29
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 20
+            },
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 15
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 30
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 21
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 10
+            }
+        ]
+    },
+    "grove": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 3
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 2
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 10
+            },
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 16
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 3
+            }
+        ]
+    },
+    "kairos": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 3
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 6
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 10
+            },
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 8
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 9
+            }
+        ]
+    },
+    "phi kappa psi": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 4
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 8
+            },
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 6
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 18
+            }
+        ]
+    },
+    "pi beta phi": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 10
+            },
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 10
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 20
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 10
+            }
+        ]
+    },
+    "evgr-a duan family hall": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 265
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 265
+            }
+        ]
+    },
+    "mirrielees": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "wooden_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 63
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "wooden_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 63
+            }
+        ]
+    }
+}

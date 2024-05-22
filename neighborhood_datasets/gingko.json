@@ -16,7 +16,7 @@
             {"Count": 3, "Amenities": ["sink"]},
             {"Count": 1, "Amenities": ["personal_kitchen"]}
           ],
-          "3 BR Triple Spaces": [
+          "3BR Triple Spaces": [
             {"Count": 58, "Amenities": ["ground_floor", "elevator_access"]},
             {"Count": 50, "Amenities": ["carpet_flooring"]},
             {"Count": 6, "Amenities": ["braille_signage"]}

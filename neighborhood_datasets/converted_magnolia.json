@@ -1,0 +1,534 @@
+{
+    "adams": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 11
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 26
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 52
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "personal_kitchen"
+                ],
+                "num_rooms": 3
+            }
+        ]
+    },
+    "east (treat)": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 12
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 30
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 16
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "personal_kitchen"
+                ],
+                "num_rooms": 3
+            }
+        ]
+    },
+    "murray": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 9
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 30
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 20
+            }
+        ]
+    },
+    "potter": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 6
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 12
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "carpet_flooring"
+                ],
+                "num_rooms": 56
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "personal_kitchen"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "1-room quad": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "sink"
+                ],
+                "num_rooms": 6
+            }
+        ],
+        "3-room quint": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "ground_floor"
+                ],
+                "num_rooms": 6
+            }
+        ]
+    },
+    "robinson": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 6
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 14
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "carpet_flooring"
+                ],
+                "num_rooms": 52
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "personal_kitchen"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "1-room quad": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "sink"
+                ],
+                "num_rooms": 6
+            }
+        ],
+        "3-room quint": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "ground_floor"
+                ],
+                "num_rooms": 9
+            }
+        ]
+    },
+    "schiff": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 6
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 14
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "carpet_flooring"
+                ],
+                "num_rooms": 52
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "personal_kitchen"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "1-room quad": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "sink"
+                ],
+                "num_rooms": 6
+            }
+        ],
+        "3-room quint": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "ground_floor"
+                ],
+                "num_rooms": 12
+            }
+        ]
+    },
+    "suites": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 11
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 38
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 12
+            }
+        ],
+        "1-room single": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "personal_kitchen"
+                ],
+                "num_rooms": 9
+            },
+            {
+                "facilities": [
+                    "elevator_access",
+                    "sink"
+                ],
+                "num_rooms": 64
+            },
+            {
+                "facilities": [
+                    "elevator_access",
+                    "ground_floor"
+                ],
+                "num_rooms": 168
+            },
+            {
+                "facilities": [
+                    "elevator_access",
+                    "carpet_flooring"
+                ],
+                "num_rooms": 16
+            }
+        ]
+    },
+    "yost": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 2
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 26
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 12
+            }
+        ]
+    },
+    "550 lasuen": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 4
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 2
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 38
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "personal_kitchen"
+                ],
+                "num_rooms": 3
+            }
+        ]
+    },
+    "sigma phi epsilon": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 4
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 2
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 38
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "personal_kitchen"
+                ],
+                "num_rooms": 3
+            }
+        ],
+        "3-room quint": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "ground_floor"
+                ],
+                "num_rooms": 5
+            }
+        ]
+    },
+    "synergy": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "ground_floor",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 4
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "braille_signage"
+                ],
+                "num_rooms": 12
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "carpet_flooring"
+                ],
+                "num_rooms": 30
+            }
+        ],
+        "1-room quad": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "sink"
+                ],
+                "num_rooms": 4
+            }
+        ]
+    },
+    "evgr-a duan family hall": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 56
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 56
+            }
+        ]
+    },
+    "mirrielees": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "wooden_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 35
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "wooden_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 35
+            }
+        ]
+    }
+}
