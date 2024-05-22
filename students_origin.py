@@ -62,7 +62,7 @@ def generate_students(rooms_data, num_students, dorm_names, room_configurations,
         current_student[1] = year
 
         # OAE accommodations
-        num_oae = random.choices([0, 1, 2], weights=[0.60, 0.25, 0.15])[0]
+        num_oae = random.choices([0, 1, 2, 3, 4, 5], weights=[0.6, 0.2, 0.1, 0.035, 0.015, 0.0])[0]
         oae_accommodations = random.sample(accomodations[:-1], num_oae)
         current_student[2] = ",".join(oae_accommodations) if num_oae > 0 else "None"
 
@@ -248,7 +248,7 @@ def calculate_score(assignments, df_students):
         dorm_rank = list(df_students['Rankings'][student_id])
         print(dorm_rank)
         if dorm_rank == [] or dorm not in dorm_rank:
-            student_score = 0
+            student_score = -0.5
         else:
             student_score = 1 / (1 + dorm_rank.index(dorm))
         scores[0] += student_score
