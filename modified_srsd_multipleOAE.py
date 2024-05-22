@@ -3,25 +3,30 @@ import json
 import numpy as np
 import pandas as pd
 import math
+import copy 
 
-with open('original.json', 'r') as file:
+with open('/Users/aryanguls/Desktop/Improved-Stanford-Housing-Selection/neighborhood_datasets/converted_aspen.json', 'r') as file:
     rooms_data = json.load(file)
+
+rooms_data2 = copy.deepcopy(rooms_data)
+dorm_names = rooms_data2.keys()
+
 
 #below taken from dataset.py
 accomodations = [
     "ground_floor", "carpet_flooring", "wooden_flooring", "sink", "elevator_access", "braille_signage", "personal_kitchen", "None"
 ]
 
-dorm_names = [
-    "crothers_memorial", "faisan", "loro", "paloma", "gavilan", "cardenal",
-    "ng", "kimball", "adams", "potter", "suites", "adelfa", "meier", "norcliffe", "naranja",
-    "roble", "sally_ride", "twain", "toyon", "arroyo", "junipero", "trancos", "evgr_a", "mirrielees"
-]
+# dorm_names = [
+#     "crothers_memorial", "faisan", "loro", "paloma", "gavilan", "cardenal",
+#     "ng", "kimball", "adams", "potter", "suites", "adelfa", "meier", "norcliffe", "naranja",
+#     "roble", "sally_ride", "twain", "toyon", "arroyo", "junipero", "trancos", "evgr_a", "mirrielees"
+# ]
 
 room_configurations = [
     "1-room single", "1-room double", "1-room triple", "1-room quad",
     "2-room double", "2-room triple", "2-room quad",
-    "3-room double", "3-room triple", "3-room quad"
+    "3-room double", "3-room triple", "3-room quad", "3-room quint"
 ]
 
 
