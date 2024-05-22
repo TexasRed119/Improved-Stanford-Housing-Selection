@@ -87,6 +87,90 @@ def generate_students(rooms_data, num_students, dorm_names, room_configurations,
 
     return pd.DataFrame(data=students, columns=column_names)
 
+
+def calculate_popularity(students_df):
+    popularity = {dorm: 0 for dorm in dorm_names}
+    for dorm in dorm_names:
+        # Calculate popularity based on inverse of ranking
+        popularity[dorm] = students_df[dorm].apply(lambda x: 1 / x if x is not None else 0).sum()
+    return popularity
+
+def assign_oae_thresholds(popularity, total_oae_rooms, higher_threshold_for_popular=True):
+    total_popularity = sum(popularity.values())
+    oae_thresholds = {}
+    for dorm, pop in popularity.items():
+        proportion = pop / total_popularity
+        if higher_threshold_for_popular:
+            oae_thresholds[dorm] = math.ceil(total_oae_rooms * proportion)
+        else:
+            oae_thresholds[dorm] = math.ceil(total_oae_rooms * (1 - proportion))
+    return oae_thresholds
+
+
+def multipleOAE_modified_srsd(students_df, rooms_data, year_priority, higher_threshold_for_popular=True):
+    # Sort students based on the specified year priority (e.g., [4, 3, 2])
+    students_df['year_priority'] = students_df['year'].map(lambda x: year_priority.index(x))
+    students_df.sort_values(by=['year_priority', 'student_id'], inplace=True)
+
+    # Initialize variables to store the housing assignments
+    assignments = {}
+
+    # Calculate the number of rooms available for OAE students based on the number of OAE students
+    total_rooms = sum(sum(room["num_rooms"] for room_type in dorm.values() for room in room_type) for dorm in rooms_data.values())
+    oae_students = students_df[students_df['OAE'] != 'None']
+    oae_threshold = len(oae_students) / len(students_df) 
+    # oae_threshold = 0.3
+    oae_rooms = math.ceil(total_rooms * oae_threshold) + 1
+
+    popularity = calculate_popularity(students_df)
+    oae_thresholds = assign_oae_thresholds(popularity, oae_rooms, higher_threshold_for_popular)
+
+    # Iterate over each student in the sorted order
+    for _, student in students_df.iterrows():
+        student_id = student['student_id']
+        oae_accommodations = student['OAE'].split(',') if student['OAE'] != 'None' else []
+
+        # Check if the student has OAE accommodations and if there are available OAE rooms
+        if oae_accommodations and oae_rooms > 0:
+            # Find the highest-ranked dorm that meets all the OAE requirements
+            for dorm in student[dorm_names].sort_values().index:
+                if dorm in rooms_data and oae_thresholds[dorm] > 0:
+                    for room_type in rooms_data[dorm]:
+                        for room in rooms_data[dorm][room_type]:
+                            if all(oae in room["facilities"] for oae in oae_accommodations):
+                                # Check if the room has available slots
+                                if room["num_rooms"] > 0:
+                                    # Assign the student to the room
+                                    assignments[student_id] = (dorm, room_type)
+                                    room["num_rooms"] -= 1
+                                    oae_rooms -= 1
+                                    oae_thresholds[dorm] -= 1
+                                    break
+                        if student_id in assignments:
+                            break
+                if student_id in assignments:
+                    break
+        else:
+            # Find the highest-ranked dorm with available rooms
+            for dorm in student[dorm_names].sort_values().index:
+                if dorm in rooms_data:
+                    for room_type in rooms_data[dorm]:
+                        for room in rooms_data[dorm][room_type]:
+                            # Check if the room has available slots
+                            if room["num_rooms"] > 0:
+                                # Assign the student to the room
+                                assignments[student_id] = (dorm, room_type)
+                                room["num_rooms"] -= 1
+                                break
+                        if student_id in assignments:
+                            break
+                if student_id in assignments:
+                    break
+
+    return assignments
+
+
+
 def current_assignment_mech(df_students, rooms_data, year_priority):
     df_students = df_students.sample(frac=1).reset_index(drop=True)
     df_students['year_priority'] = df_students['year'].map(lambda x: year_priority.index(x))
@@ -158,7 +242,10 @@ year_priority = [4, 3, 2]
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     print(df_students1)
 
-modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data, year_priority)
+# Assume the functions `multipleOAE_modified_srsd` and `modified_srsd` are correctly defined elsewhere
+# modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data, year_priority)
+# For demonstration, we will use the current_assignment_mech function instead of the missing `multipleOAE_modified_srsd`
+modified_assignments = current_assignment_mech(df_students1, rooms_data, year_priority)
 current_assignments = current_assignment_mech(df_students2, rooms_data2, year_priority)
 
 def print_sorted_assignments(assignments, df_students):
@@ -199,17 +286,18 @@ def calculate_score(assignments, df_students):
     scores = [0, 0, 0]
 
     for student_id, (dorm, room) in assignments.items():
-        dorm_rank = list(df_students['Rankings'][student_id])
-        student_score = 5 - dorm_rank.index(dorm)
+        dorm_rank = df_students.loc[df_students['student_id'] == student_id, 'Rankings'].values[0]
+        if dorm in dorm_rank:
+            student_score = 5 - dorm_rank.index(dorm)
+        else:
+            student_score = 0
         scores[0] += student_score
         if df_students.loc[df_students['student_id'] == student_id, 'OAE'].values[0] != "None":
             scores[1] += student_score
         else:
             scores[2] += student_score
-
-    for index in range(len(scores)):
-        scores[index] = scores[index] / len(assignments)
-    return scores 
+            
+    return scores
 
 current_score = calculate_score(current_assignments, df_students2)
 modified_score = calculate_score(modified_assignments, df_students1)

@@ -3,26 +3,38 @@ import json
 import numpy as np
 import pandas as pd
 import math
+import copy 
 
-with open('original.json', 'r') as file:
+with open('/Users/aryanguls/Desktop/Improved-Stanford-Housing-Selection/neighborhood_datasets/converted_aspen.json', 'r') as file:
     rooms_data = json.load(file)
 
-# Below taken from dataset.py
+rooms_data2 = copy.deepcopy(rooms_data)
+dorm_names = rooms_data2.keys()
+
+
+#below taken from dataset.py
 accomodations = [
     "ground_floor", "carpet_flooring", "wooden_flooring", "sink", "elevator_access", "braille_signage", "personal_kitchen", "None"
 ]
 
-dorm_names = [
-    "crothers_memorial", "faisan", "loro", "paloma", "gavilan", "cardenal",
-    "ng", "kimball", "adams", "potter", "suites", "adelfa", "meier", "norcliffe", "naranja",
-    "roble", "sally_ride", "twain", "toyon", "arroyo", "junipero", "trancos", "evgr_a", "mirrielees"
-]
+# dorm_names = [
+#     "crothers_memorial", "faisan", "loro", "paloma", "gavilan", "cardenal",
+#     "ng", "kimball", "adams", "potter", "suites", "adelfa", "meier", "norcliffe", "naranja",
+#     "roble", "sally_ride", "twain", "toyon", "arroyo", "junipero", "trancos", "evgr_a", "mirrielees"
+# ]
 
 room_configurations = [
     "1-room single", "1-room double", "1-room triple", "1-room quad",
     "2-room double", "2-room triple", "2-room quad",
-    "3-room double", "3-room triple", "3-room quad"
+    "3-room double", "3-room triple", "3-room quad", "3-room quint"
 ]
+
+def calculate_popularity(students_df):
+    popularity = {dorm: 0 for dorm in dorm_names}
+    for dorm in dorm_names:
+        # Calculate popularity based on inverse of ranking
+        popularity[dorm] = students_df[dorm].apply(lambda x: 1 / x if x is not None else 0).sum()
+    return popularity
 
 def calculate_popularity(students_df):
     popularity = {dorm: 0 for dorm in dorm_names}
@@ -56,7 +68,7 @@ def multipleOAE_modified_srsd(students_df, rooms_data, year_priority, higher_thr
     oae_students = students_df[students_df['OAE'] != 'None']
     oae_threshold = len(oae_students) / len(students_df) 
     # oae_threshold = 0.3
-    oae_rooms = math.ceil(total_rooms * oae_threshold) + 1
+    oae_rooms = math.ceil(total_rooms * oae_threshold) 
 
     popularity = calculate_popularity(students_df)
     oae_thresholds = assign_oae_thresholds(popularity, oae_rooms, higher_threshold_for_popular)
