@@ -1,0 +1,455 @@
+{
+    "adelfa": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 30
+            },
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 10
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 8
+            }
+        ]
+    },
+    "meier": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 15
+            },
+            {
+                "facilities": [
+                    "elevator_access",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 14
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 29
+            },
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 25
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 26
+            }
+        ]
+    },
+    "naranja": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 29
+            },
+            {
+                "facilities": [
+                    "elevator_access",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 10
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "ground_floor"
+                ],
+                "num_rooms": 6
+            }
+        ]
+    },
+    "norcliffe": {
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 15
+            },
+            {
+                "facilities": [
+                    "elevator_access",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 14
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 29
+            },
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 25
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 26
+            }
+        ]
+    },
+    "ujamaa": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 30
+            },
+            {
+                "facilities": [
+                    "elevator_access",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 27
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "ground_floor"
+                ],
+                "num_rooms": 16
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 16
+            },
+            {
+                "facilities": [
+                    "wooden_flooring"
+                ],
+                "num_rooms": 20
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 36
+            }
+        ]
+    },
+    "west lagunita": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 15
+            },
+            {
+                "facilities": [
+                    "elevator_access",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 15
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 29
+            },
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 29
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 29
+            },
+            {
+                "facilities": [
+                    "wooden_flooring"
+                ],
+                "num_rooms": 29
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 29
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 40
+            }
+        ]
+    },
+    "roble": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 100
+            },
+            {
+                "facilities": [
+                    "elevator_access",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 20
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "ground_floor"
+                ],
+                "num_rooms": 50
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "elevator_access"
+                ],
+                "num_rooms": 30
+            },
+            {
+                "facilities": [
+                    "wooden_flooring"
+                ],
+                "num_rooms": 25
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 30
+            }
+        ],
+        "2-room triple": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 35
+            }
+        ],
+        "3-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 20
+            }
+        ],
+        "1-room quad": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 9
+            }
+        ]
+    },
+    "alpha kappa delta phi - chi omega (formerly 1018 campus)": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 6
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 10
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "ground_floor"
+                ],
+                "num_rooms": 10
+            }
+        ]
+    },
+    "xanadu": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "sink"
+                ],
+                "num_rooms": 10
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 20
+            }
+        ],
+        "2-room double": [
+            {
+                "facilities": [
+                    "braille_signage",
+                    "ground_floor"
+                ],
+                "num_rooms": 12
+            }
+        ],
+        "1-room triple": [
+            {
+                "facilities": [
+                    "kitchen",
+                    "ground_floor"
+                ],
+                "num_rooms": 12
+            }
+        ],
+        "1-room quad": [
+            {
+                "facilities": [
+                    "elevator_access",
+                    "wooden_flooring"
+                ],
+                "num_rooms": 6
+            }
+        ]
+    },
+    "evgr-a duan family hall": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 44
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "carpet_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 44
+            }
+        ]
+    },
+    "mirrielees": {
+        "1-room single": [
+            {
+                "facilities": [
+                    "wooden_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 28
+            }
+        ],
+        "1-room double": [
+            {
+                "facilities": [
+                    "wooden_flooring",
+                    "bathroom",
+                    "sink",
+                    "kitchen"
+                ],
+                "num_rooms": 28
+            }
+        ]
+    }
+}
