@@ -13,7 +13,7 @@ from tabulate import tabulate
 #with open('/Users/ismailmardin/CS269i-HW2-Tournament-2024/Improved-Stanford-Housing-Selection/neighborhood_datasets/converted_aspen.json', 'r') as file:
  #   rooms_data = json.load(file)
 
-with open('converted_aspen.json', 'r') as file:
+with open('converted_gingko_new.json', 'r') as file:
     rooms_data = json.load(file)
 
 rooms_data1 = copy.deepcopy(rooms_data)
@@ -97,17 +97,17 @@ def generate_students(rooms_data, num_students, dorm_names, room_configurations,
 
         # Generate rankings for suitable dorms with preference weighting
         rankings = {}
-        priority_dorms = ["neptune (650 mayfield)", "mars", "pluto", "columbae"]  # List of dorms to prioritize
+        priority_dorms = ["evgr-a duan family hall", "mirrielees", "hammarskjold", "toyon"]  # List of dorms to prioritize, dorms with more accommodations more favored
         priority_weight = 0.3  # Adjust this value to control the skew (0.0 to 1.0, with lower being more prioritized)
 
         for dorm in suitable_dorms:
             if dorm in priority_dorms:
                 # Generate a more favorable (lower) ranking for priority dorms
                 # The range for priority dorms is skewed towards lower numbers
-                rankings[dorm] = random.randint(1, max(1, int(len(suitable_dorms) * priority_weight)))
+                rankings[dorm] = np.random.exponential(1/(len(suitable_dorms)) * priority_weight, 1)
             else:
                 # Normal random ranking for other dorms
-                rankings[dorm] = random.randint(1, len(suitable_dorms))
+                rankings[dorm] =  np.random.exponential(1/(len(suitable_dorms)), 1)
 
         # Sort the rankings based on the values
         sorted_rankings = sorted(rankings.items(), key=lambda x: x[1])
@@ -209,7 +209,7 @@ def current_assignment_mech(df_students, rooms_data, year_priority):
 
     return assignments
 
-df_students1 = generate_students(rooms_data, 800, dorm_names, room_configurations, accomodations)
+df_students1 = generate_students(rooms_data, 800, dorm_names, room_configurations, accomodations) #1191 students of out 1,191 rooms
 df_students2 = copy.deepcopy(df_students1)
 
 # print(df_students)
