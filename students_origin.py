@@ -1,3 +1,4 @@
+
 import random
 import json
 import numpy as np
@@ -5,14 +6,20 @@ import pandas as pd
 from modified_srsd import modified_srsd
 from modified_srsd_multipleOAE import multipleOAE_modified_srsd
 import copy
+import statistics
+from tabulate import tabulate
 
 
-with open('/Users/ismailmardin/CS269i-HW2-Tournament-2024/Improved-Stanford-Housing-Selection/neighborhood_datasets/converted_aspen.json', 'r') as file:
+#with open('/Users/ismailmardin/CS269i-HW2-Tournament-2024/Improved-Stanford-Housing-Selection/neighborhood_datasets/converted_aspen.json', 'r') as file:
+ #   rooms_data = json.load(file)
+
+with open('converted_aspen.json', 'r') as file:
     rooms_data = json.load(file)
 
+rooms_data1 = copy.deepcopy(rooms_data)
 rooms_data2 = copy.deepcopy(rooms_data)
 dorm_names = rooms_data2.keys()
-print(dorm_names)
+#print(dorm_names)
 
 #below taken from dataset.py
 accomodations = [
@@ -61,26 +68,32 @@ def generate_students(rooms_data, num_students, dorm_names, room_configurations,
         year = random.randint(2, 4)
         current_student[1] = year
 
-        # OAE accommodations
-        num_oae = random.choices([0, 1, 2, 3, 4, 5], weights=[0.6, 0.2, 0.1, 0.005, 0.005, 0.0])[0]
-        oae_accommodations = random.sample(accomodations[:-1], num_oae)
-        current_student[2] = ",".join(oae_accommodations) if num_oae > 0 else "None"
+        #ensure random OAE accommodations generated for each student exist in the housing dataset
+        viable_OAEs = False
+        while not viable_OAEs:
+          # OAE accommodations
+          num_oae = random.choices([0, 1, 2, 3, 4, 5], weights=[0.6, 0.2, 0.15, 0.005, 0.000, 0.0])[0] #note that I changed this slightly
+          oae_accommodations = random.sample(accomodations[:-1], num_oae)
+          current_student[2] = ",".join(oae_accommodations) if num_oae > 0 else "None"
 
-        # dorm rankings
-        suitable_dorms = []
-        for dorm in dorm_names:
-            if dorm in rooms_data:
-                if current_student[2] == "None":  # student has no OAE
-                    suitable_dorms.append(dorm)
-                else:  # student has OAE accommodations
-                    for room in room_configurations:
-                        if room in rooms_data[dorm]:
-                            for k in range(len(rooms_data[dorm][room])):
-                                if all(oae in rooms_data[dorm][room][k]["facilities"] for oae in oae_accommodations):
-                                    suitable_dorms.append(dorm)
-                                    break
-                        if dorm in suitable_dorms:
-                            break
+          # dorm rankings
+          suitable_dorms = []
+          for dorm in dorm_names:
+              if dorm in rooms_data:
+                  if current_student[2] == "None":  # student has no OAE
+                      suitable_dorms.append(dorm)
+                  else:  # student has OAE accommodations
+                      for room in room_configurations:
+                          if room in rooms_data[dorm]:
+                              for k in range(len(rooms_data[dorm][room])):
+                                  if all(oae in rooms_data[dorm][room][k]["facilities"] for oae in oae_accommodations):
+                                      suitable_dorms.append(dorm)
+                                      break
+                          if dorm in suitable_dorms:
+                              break
+          if suitable_dorms:
+            viable_OAEs = True
+
 
         # Generate rankings for suitable dorms with preference weighting
         rankings = {}
@@ -124,7 +137,7 @@ serial dictatorship modeling current housing mechanism employed by stanford
 '''
 def current_assignment_mech(df_students, rooms_data, year_priority):
     # Shuffle dataframe of students
-    df_students = df_students.sample(frac=1).reset_index(drop=True)
+    #df_students = df_students.sample(frac=1).reset_index(drop=True)
 
     # Sort students based on the specified year priority
     df_students['year_priority'] = df_students['year'].map(lambda x: year_priority.index(x))
@@ -163,7 +176,7 @@ def current_assignment_mech(df_students, rooms_data, year_priority):
                     if dorm in rooms_data:
                         for room_type, rooms in rooms_data[dorm].items():
                             for room in rooms:
-                                if room['num_rooms'] > 0: 
+                                if room['num_rooms'] > 0:
                                 # and (not oae_accommodations or all(oae in room['facilities'] for oae in oae_accommodations)):
                                     assignments[student_id] = (dorm, room_type)
                                     room['num_rooms'] -= 1
@@ -176,18 +189,17 @@ def current_assignment_mech(df_students, rooms_data, year_priority):
 
                 # Fallback to any available room if no preferred room is found
                 if not assigned:
+                    possible_assignments = []
                     for dorm, room_types in rooms_data.items():
                         for room_type, rooms in room_types.items():
                             for room in rooms:
                                 if room['num_rooms'] > 0:
-                                    assignments[student_id] = (dorm, room_type)
-                                    room['num_rooms'] -= 1
-                                    assigned = True
-                                    break
-                            if assigned:
-                                break
-                        if assigned:
-                            break
+                                    possible_assignments.append((dorm,room_type))
+                                    
+                    r = random.randint(0,len(possible_assignments) - 1)
+                    assignments[student_id] = possible_assignments[r]
+                    room['num_rooms'] -= 1
+                    assigned = True
 
     # Process OAE students first with random assignment
     assign_rooms(df_students[df_students['OAE'] != "None"], random_oae=True)
@@ -197,19 +209,19 @@ def current_assignment_mech(df_students, rooms_data, year_priority):
 
     return assignments
 
-df_students1 = generate_students(rooms_data, 700, dorm_names, room_configurations, accomodations)
+df_students1 = generate_students(rooms_data, 800, dorm_names, room_configurations, accomodations)
 df_students2 = copy.deepcopy(df_students1)
 
 # print(df_students)
 
 # Example usage
-# oae_threshold = 0.3  # Adjust the threshold as needed
+
 year_priority = [4, 3, 2]  # Specify the year priority order
 
-with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
-    print(df_students1)
+#with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+#    print(df_students1)
 
-modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data, year_priority)
+modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data1, year_priority)
 current_assignments = current_assignment_mech(df_students2, rooms_data2, year_priority)
 
 def print_sorted_assignments(assignments, df_students):
@@ -217,11 +229,11 @@ def print_sorted_assignments(assignments, df_students):
     for student_id, (dorm, room_type) in sorted_assignments:
         print(f"Student {student_id}: {dorm} - {room_type}")
 
-print("\nCurrent mech assignments (sorted by student ID):")
-print_sorted_assignments(current_assignments, df_students2)
+#print("\nCurrent mech assignments (sorted by student ID):")
+#print_sorted_assignments(current_assignments, df_students2)
 
-print("\nModified mech assignments (sorted by student ID):")
-print_sorted_assignments(modified_assignments, df_students1)
+#print("\nModified mech assignments (sorted by student ID):")
+#print_sorted_assignments(modified_assignments, df_students1)
 
 
 
@@ -249,17 +261,17 @@ print("\nModified mech OAE proportions:")
 for dorm in dorm_names:
     print(f"{dorm}: {modified_oae_proportions[dorm]:.2f} ({modified_oae_counts[dorm]}/{modified_total_counts[dorm]})")
 
-def calculate_score(assignments, df_students): 
-    
+def calculate_score(assignments, df_students):
+
     scores = [0, 0, 0]
     unassigned = 0
 
     for student_id, (dorm, room) in assignments.items():
         dorm_rank = list(df_students['Rankings'][student_id])
-        print(dorm_rank)
+        #print(dorm_rank)
         if dorm_rank == [] or dorm not in dorm_rank:
-            student_score = -0.5
-            unassigned += 1
+            student_score = 0 #unhappy, got a dorm they didnt rank
+            unassigned += 1 #this number is more like "assigned, but not to ranked dorm" if student was OAE
         else:
             student_score = 1 / (1 + dorm_rank.index(dorm))
         scores[0] += student_score
@@ -267,15 +279,88 @@ def calculate_score(assignments, df_students):
             scores[1] += student_score
         else:
             scores[2] += student_score
-        
+
+    #normalize
+    scores[0] = scores[0]/ 800 #i think we should note in paper that adding OAE and non-OAE doesn't work because they are not on the same scale, rankings are different
+    scores[1] = scores[1]/sum(current_oae_counts.values())
+    scores[2] = scores[2]/(800 - sum(current_oae_counts.values()))
+
         # for index in range(len(scores)):
         #     scores[index] = scores[index] / len(assignments)
-    
-    
+
+
     return scores, unassigned
+
 
 current_score, current_unassigned = calculate_score(current_assignments, df_students2)
 modified_score, modified_unassigned = calculate_score(modified_assignments, df_students1)
 
+print(current_unassigned)
+print(modified_unassigned)
+
 print(f'Current mech score[Overall, OAE, non-OAE]: {current_score} \nModified mech score[Overall, OAE, non-OAE]: {modified_score}')
 #  print(f'Current mech unassigned: {current_unassigned} \nModified unassigned: {modified_unassigned}')
+
+#simulation to get a real number (mean, std (or sample variance)) for ismails score
+def score_anal(rooms_data):
+  current_overall = []
+  current_oae = []
+  current_nonoae = []
+  modified_overall = []
+  modified_oae = []
+  modified_nonoae = []
+
+  #n = 25, ~6/7 minutes
+  for i in range(0,25):
+    #print(i)
+    rooms_data1 = copy.deepcopy(rooms_data)
+    rooms_data2 = copy.deepcopy(rooms_data)
+    dorm_names = rooms_data2.keys()
+
+    year_priority = [4, 3, 2]
+
+    df_students1 = generate_students(rooms_data, 700, dorm_names, room_configurations, accomodations)
+    df_students2 = copy.deepcopy(df_students1)
+
+    modified_assignments = multipleOAE_modified_srsd(df_students1, rooms_data1, year_priority)
+    current_assignments = current_assignment_mech(df_students2, rooms_data2, year_priority)
+
+    c_score, _ = calculate_score(current_assignments, df_students2)
+    m_score, _ = calculate_score(modified_assignments, df_students1)
+
+    current_overall.append(c_score[0])
+    current_oae.append(c_score[1])
+    current_nonoae.append(c_score[2])
+
+    modified_overall.append(m_score[0])
+    modified_oae.append(m_score[1])
+    modified_nonoae.append(m_score[2])
+
+  mean_c_overall = statistics.mean(current_overall)
+  stdev_c_overall = statistics.stdev(current_overall)
+  mean_c_oae = statistics.mean(current_oae)
+  stdev_c_oae = statistics.stdev(current_oae)
+  mean_c_nonoae = statistics.mean(current_nonoae)
+  stdev_c_nonoae = statistics.stdev(current_nonoae)
+
+  mean_m_overall = statistics.mean(modified_overall)
+  stdev_m_overall = statistics.stdev(modified_overall)
+  mean_m_oae = statistics.mean(modified_oae)
+  stdev_m_oae = statistics.stdev(modified_oae)
+  mean_m_nonoae = statistics.mean(modified_nonoae)
+  stdev_m_nonoae = statistics.stdev(modified_nonoae)
+
+  return mean_c_overall, stdev_c_overall, mean_c_oae, stdev_c_oae, mean_c_nonoae, stdev_c_nonoae, mean_m_overall, stdev_m_overall, mean_m_oae, stdev_m_oae, mean_m_nonoae, stdev_m_nonoae
+
+mean_c_overall, stdev_c_overall, mean_c_oae, stdev_c_oae, mean_c_nonoae, stdev_c_nonoae, mean_m_overall, stdev_m_overall, mean_m_oae, stdev_m_oae, mean_m_nonoae, stdev_m_nonoae = score_anal(rooms_data)
+
+ratio_c = mean_c_oae / mean_c_nonoae
+ratio_m = mean_m_oae / mean_m_nonoae
+
+table = [["Current", mean_c_overall, stdev_c_overall, mean_c_oae, stdev_c_oae, mean_c_nonoae, stdev_c_nonoae, ratio_c], ["Modified",  mean_m_overall, stdev_m_overall, mean_m_oae, stdev_m_oae, mean_m_nonoae, stdev_m_nonoae, ratio_m]]
+
+col_names = ["Model", "Mean Overall Score", "Stdev Overall Score", "OAE Score", "Stdev OAE Score", "Non-OAE Score", "Stdev Non-OAE Score", "OAE/Non-OAE Score Ratio"]
+
+df_table = pd.DataFrame(table, columns=col_names)
+
+print(tabulate(df_table, headers=df_table.columns, tablefmt="fancy_grid"))
