@@ -272,13 +272,17 @@
         "1-room single": [
             {
                 "facilities": [
-                    "ground_floor"
+                    "ground_floor",
+                    "wooden_flooring",
+                    "sink"
                 ],
                 "num_rooms": 6
             },
             {
                 "facilities": [
-                    "wooden_flooring"
+                    "braille_signage",
+                    "wooden_flooring",
+                    "kitchen"
                 ],
                 "num_rooms": 3
             }
@@ -293,7 +297,9 @@
             },
             {
                 "facilities": [
-                    "carpet_flooring"
+                    "carpet_flooring",
+                    "kitchen",
+                    "bathroom"
                 ],
                 "num_rooms": 14
             }
