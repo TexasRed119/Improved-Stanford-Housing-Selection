@@ -123,7 +123,7 @@
             {
                 "facilities": [
                     "carpet_flooring",
-                    "bathroom"
+                    "bathroom",
                     "sink"
                 ],
                 "num_rooms": 7
@@ -131,7 +131,7 @@
             {
                 "facilities": [
                     "carpet_flooring",
-                    "bathroom"
+                    "bathroom",
                     "sink"
                 ],
                 "num_rooms": 5
@@ -141,7 +141,7 @@
             {
                 "facilities": [
                     "carpet_flooring",
-                    "bathroom"
+                    "bathroom",
                     "sink"
                 ],
                 "num_rooms": 13
@@ -149,7 +149,7 @@
             {
                 "facilities": [
                    "carpet_flooring",
-                    "bathroom"
+                    "bathroom",
                     "sink"
                 ],
                 "num_rooms": 15
