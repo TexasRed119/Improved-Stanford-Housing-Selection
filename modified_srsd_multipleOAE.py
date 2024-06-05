@@ -82,12 +82,21 @@ def ensurance_OAE(rooms_data, remaining_students, proposed_room):
 
 def normal_student(student, student_id, remaining_students, assignments, rooms_data, is_OAE_leftover):
   assigned = False
-  # Find the highest-ranked dorm with available rooms
+  oae_accommodations = student['OAE'].split(',') if student['OAE'] != 'None' else []
+  # Find the highest-ranked dorm with available rooms, ignoring thresholds for OAE students who didn't get assigned
   for dorm in student[dorm_names].sort_values().index:
                 if dorm in rooms_data:
                     for room_type in rooms_data[dorm]:
                         for room in rooms_data[dorm][room_type]:
+                          if is_OAE_leftover and all(oae in room["facilities"] for oae in oae_accommodations):
                             # Check if the room has available slots
+                            if room["num_rooms"] > 0:
+                                  # Assign the student to the room
+                                  assignments[student_id] = (dorm, room_type)
+                                  assigned = True
+                                  room["num_rooms"] -= 1
+                                  break
+                          elif not is_OAE_leftover: 
                             if room["num_rooms"] > 0:
                                 if ensurance_OAE(rooms_data, remaining_students, room):
                                   # Assign the student to the room
@@ -99,7 +108,23 @@ def normal_student(student, student_id, remaining_students, assignments, rooms_d
                             break
                 if student_id in assignments:
                     break
-  if is_OAE_leftover and not assigned:
+  if is_OAE_leftover and not assigned: # OAE students who still didn't get assigned when ignoring thresholds
+    for dorm in student[dorm_names].sort_values().index:
+                if dorm in rooms_data:
+                    for room_type in rooms_data[dorm]:
+                        for room in rooms_data[dorm][room_type]:
+                            # Check if the room has available slots
+                            if room["num_rooms"] > 0:
+                                  # Assign the student to the room
+                                  assignments[student_id] = (dorm, room_type)
+                                  assigned = True
+                                  room["num_rooms"] -= 1
+                                  break
+                        if student_id in assignments:
+                            break
+                if student_id in assignments:
+                    break
+  if is_OAE_leftover and not assigned: #OAE student STILL not assigned? random assignment to any dorm (the amount of these cases will be counted)
                     possible_assignments = []
                     for dorm, room_types in rooms_data.items():
                         for room_type, rooms in room_types.items():
@@ -163,7 +188,7 @@ def multipleOAE_modified_srsd(students_df, rooms_data, year_priority, higher_thr
                 if student_id in assignments:
                     break
             if not assigned:
-              #assign like normal student, because there were more requests than were possible
+              #assign like normal student using their rankings, giving OAE more flexibility to get into the dorm they need (as they are still unassigned)
               #use same dorm, different room. if still not possible, just randomize
               normal_student(student, student_id, remaining_students, assignments, rooms_data, True)
 
