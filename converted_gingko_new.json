@@ -175,8 +175,8 @@
         ],
         "1-room triple": [
             {
-                "facilities": [
-                    "personal_kitchen"
+                "facilities": ["elevator_access", "braille_signage", 
+                "carpet_flooring", "ground_floor", "sink", "kitchen"
                 ],
                 "num_rooms": 2
             },
@@ -200,7 +200,8 @@
         ],
         "3-room quad": [
             {
-                "facilities": [
+                "facilities": ["elevator_access", "braille_signage", 
+                "carpet_flooring", "ground_floor", "sink", "kitchen"
                 ],
                 "num_rooms": 3
             },
@@ -214,8 +215,8 @@
     "durand": {
         "1-room single": [
             {
-                "facilities": [
-                ],
+                "facilities": ["elevator_access", "braille_signage", 
+                "carpet_flooring", "ground_floor", "sink", "kitchen"],
                 "num_rooms": 4
             },
             {
@@ -227,8 +228,8 @@
         ],
         "1-room double": [
             {
-                "facilities": [
-                    "wooden_flooring"
+                "facilities": ["elevator_access", "braille_signage", 
+                "carpet_flooring", "ground_floor", "sink", "kitchen"
                 ],
                 "num_rooms": 9
             },
@@ -247,9 +248,8 @@
                 "num_rooms": 6
             },
             {
-                "facilities": [
-                    "wooden_flooring"
-                ],
+                "facilities": ["elevator_access", "braille_signage", 
+                "carpet_flooring", "ground_floor", "sink", "kitchen"],
                 "num_rooms": 3
             }
         ]
